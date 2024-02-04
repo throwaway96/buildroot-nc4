@@ -1,6 +1,6 @@
 config BR2_PACKAGE_WEBOS_GMP
 	bool "gmp 4.2.1 (shared only)"
-	depends on BR2_PACKAGE_WEBOS
+	depends on BR2_WEBOS_COMPAT
 	depends on BR2_PACKAGE_GMP
 	help
 	  The version of gmp used on webOS (up through at least webOS 8).

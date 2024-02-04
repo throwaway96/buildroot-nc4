@@ -5,3 +5,9 @@ config BR2_PACKAGE_WEBOS
 	depends on BR2_PACKAGE_LGTV
 	help
 	  WebOS meta-package
+
+config BR2_WEBOS_COMPAT
+	bool "webOS compat"
+	depends on BR2_PACKAGE_WEBOS
+	select BR2_PACKAGE_WEBOS_GMP if BR2_PACKAGE_GMP
+	select BR2_PACKAGE_WEBOS_GNUTLS if BR2_PACKAGE_GNUTLS
