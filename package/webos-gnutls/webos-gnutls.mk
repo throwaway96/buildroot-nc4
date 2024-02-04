@@ -11,7 +11,6 @@ WEBOS_GNUTLS_SITE = https://www.gnupg.org/ftp/gcrypt/gnutls/v$(WEBOS_GNUTLS_VERS
 WEBOS_GNUTLS_LICENSE = LGPL-2.1+ (core library)
 WEBOS_GNUTLS_LICENSE_FILES = COPYING.LESSER
 WEBOS_GNUTLS_DEPENDENCIES = host-pkgconf nettle
-#pcre
 WEBOS_GNUTLS_CPE_ID_VENDOR = gnu
 # Yocto meta-gplv2 sets --disable-crywrap.
 # libgnutls-openssl is not present on webOS (also GPLv3).
@@ -38,21 +37,12 @@ WEBOS_GNUTLS_CONF_OPTS = \
 	--without-librt-prefix \
 	--without-libz-prefix \
 	--without-tpm
-#	--enable-local-libopts 
 WEBOS_GNUTLS_CONF_ENV = gl_cv_socket_ipv6=yes \
 	ac_cv_header_wchar_h=$(if $(BR2_USE_WCHAR),yes,no) \
 	gt_cv_c_wchar_t=$(if $(BR2_USE_WCHAR),yes,no) \
 	gt_cv_c_wint_t=$(if $(BR2_USE_WCHAR),yes,no) \
 	gl_cv_func_gettimeofday_clobber=no
 WEBOS_GNUTLS_INSTALL_STAGING = YES
-
-# gnutls needs libregex, but pcre can be used too
-# The check isn't cross-compile friendly
-#WEBOS_GNUTLS_CONF_ENV += libopts_cv_with_libregex=yes
-#WEBOS_GNUTLS_CONF_OPTS += \
-#	--with-regex-header=pcreposix.h \
-#	--with-libregex-cflags="`$(PKG_CONFIG_HOST_BINARY) libpcreposix --cflags`" \
-#	--with-libregex-libs="`$(PKG_CONFIG_HOST_BINARY) libpcreposix --libs`"
 
 # libidn support for nommu must exclude the crywrap wrapper (uses fork)
 WEBOS_GNUTLS_CONF_OPTS += $(if $(BR2_USE_MMU),,--disable-crywrap)
