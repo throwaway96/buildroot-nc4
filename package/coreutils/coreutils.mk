@@ -14,6 +14,9 @@ COREUTILS_CPE_ID_VENDOR = gnu
 COREUTILS_CONF_OPTS = --disable-rpath \
 	$(if $(BR2_TOOLCHAIN_USES_MUSL),--with-included-regex)
 
+# Our ancient glibc doesn't include _TIME_BITS support (added in 2.34).
+COREUTILS_CONF_OPTS += --disable-year2038
+
 ifeq ($(BR2_PACKAGE_COREUTILS_INDIVIDUAL_BINARIES),y)
 COREUTILS_CONF_OPTS += --disable-single-binary
 else
